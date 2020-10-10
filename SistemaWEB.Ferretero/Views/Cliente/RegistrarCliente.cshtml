@@ -1,0 +1,79 @@
+﻿
+@using SistemaWEB.Ferretero.Models
+@model ClienteBEAN
+
+@{
+    ViewBag.Title = "RegistrarCliente";
+}
+
+<div class="col col-lg-offset-3">
+    <h2 style="color:crimson"> Registrar Nuevo Cliente</h2>
+</div>
+<br />
+@using (Html.BeginForm())
+{
+<form>
+    <div class="form">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.NombreCliente, "Nombre", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.NombreCliente, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(Model => Model.NombreCliente, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ApePat, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.ApePat, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(Model => Model.ApePat, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ApeMat, "Apellido Materno", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.ApeMat, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(Model => Model.ApeMat, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Direccion, "Direccion", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Direccion, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Telefono, "Teléfono", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Telefono, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.IdTipoDoc, "Tipo de Documento", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.IdTipoDoc, ViewBag.Lista as SelectList, "[-- Seleccione un Tipo --]", new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Documento, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Registrar
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Registro de Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Desea guardar el registro ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+}

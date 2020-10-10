@@ -1,0 +1,46 @@
+﻿@using SistemaWEB.Ferretero.Models
+@model List<ProductoBEAN>
+@{
+    ViewBag.Title = "BuscarProdByNomb";
+}
+
+<div class="col col-lg-offset-5">
+    <h2 style="color:crimson"> Busqueda de Productos</h2>
+    <br />
+    <form action="/Producto/BuscarProdByNomb" method="post">
+        <input type="text" id="nomb" name="nomb" placeholder="Ingrese nombre" class="form-control col-md-1"/>
+        <input type="submit" value="Buscar" class="btn btn-success"/>
+    </form>
+</div>
+@Html.ActionLink("Lista de Productos", "ListaProducto", "Producto", new { }, new { @class = "btn btn-primary" })
+<br />
+<br />
+<table class="table table-bordered">
+    <thead class="table-bordered">
+        <tr>
+            <th class="text-center">ID</th>
+            <th>NOMBRE</th>
+            <th>PRECIO UNIT</th>
+            <th>STOCK</th>
+            <th>TIPO DE PRODUCTO</th>
+            <th>ACCIONES</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">@item.IdProducto</td>
+                <td>@item.NombreProd</td>
+                <td>@item.PrecioProd</td>
+                <td>@item.Stock</td>
+                <td>@item.NombTipoProd</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarProducto", new { id = item.IdProducto }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProducto }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="275d70e97acd4997a8dcf6b829550439" Name="Diagram1">
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbCategoria" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbClase" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbCliente" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbProducto" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbTipoDocumento" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbTipoProducto" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbVenta" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_SistemaFerreteroModel.tbVentaDetalle" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbClase_dbo_tbCategoria_IdCategoria" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbTipoProducto_dbo_tbClase_IdClase" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbVenta_dbo_tbCliente_IdCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_SistemaFerreteroModel.FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

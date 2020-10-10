@@ -1,0 +1,53 @@
+﻿@using SistemaWEB.Ferretero.Models
+@model  ClienteBEAN
+@{
+    ViewBag.Title = "EditarCliente";
+}
+
+<h2>Editar Cliente</h2>
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <div>
+        @Html.HiddenFor(model => model.IdCliente, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NombreCliente, "Nombre", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.NombreCliente, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApePat, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.ApePat, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApeMat, "Apellido Materno", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.ApeMat, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Direccion, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Telefono, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.IdTipoDoc, "Tipo de Documento", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.IdTipoDoc, ViewBag.Lista as SelectList, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Documento, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Actualizar" class="btn btn-success" />
+    </div>
+
+</div>
+}

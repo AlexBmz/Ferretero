@@ -1,0 +1,61 @@
+﻿@using SistemaWEB.Ferretero.Models
+@model List<ClienteBEAN>
+@{
+    ViewBag.Title = "BuscarClienteByNombre";
+}
+
+
+<h2 style="color:crimson" class="col col-lg-offset-4"> Busqueda  de  Clientes</h2>
+<div class="col col-lg-offset-4">
+    <br />
+    <form action="/Cliente/BuscarClienteByNombre" method="post">
+        <input type="text" id="nomb" name="nomb" placeholder="Ingrese nombre" class="form-control col-md-1"/>
+        <input type="submit" value="Buscar" class="btn btn-success" />
+    </form>
+</div>
+@Html.ActionLink("Lista de Clientes", "ListaClientes", "Cliente", new { }, new { @class = "btn btn-primary" })
+@*<div class="col col-lg-offset-5">
+        <h2 style="color:crimson"> Busqueda Categoria</h2>
+        <br />
+       @Html.TextBox("id","")
+        @Html.ActionLink("Buscar", "BusquedaCategoria", "Categoria", new { }, new { @class = "btn btn-primary" })
+    </div>*@
+
+<br />
+<br />
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Documento</th>
+            <th>Identificacion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.NombreCliente</td>
+                <td>@item.ApePat</td>
+                <td>@item.Direccion</td>
+                <td>@item.Telefono</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Documento</td>
+                <td>@item.ApeMat</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarCliente", new { id = item.IdCliente }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCliente }, new { @class = "btn btn-danger" })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

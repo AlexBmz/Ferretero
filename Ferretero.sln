@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaWEB.Ferretero", "SistemaWEB.Ferretero\SistemaWEB.Ferretero.csproj", "{857F35F8-E128-41A7-B9D7-35FD8FEEF4F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{857F35F8-E128-41A7-B9D7-35FD8FEEF4F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857F35F8-E128-41A7-B9D7-35FD8FEEF4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857F35F8-E128-41A7-B9D7-35FD8FEEF4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857F35F8-E128-41A7-B9D7-35FD8FEEF4F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED562F85-64CD-4966-9E6D-8C44E96BF210}
+	EndGlobalSection
+EndGlobal

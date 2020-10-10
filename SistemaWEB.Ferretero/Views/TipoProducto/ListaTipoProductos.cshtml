@@ -1,0 +1,35 @@
+﻿@using SistemaWEB.Ferretero.Models
+@model List<TipoPoductoBEAN>
+@{
+    ViewBag.Title = "ListaTipoProductos";
+}
+
+<h2>Lista de Tipo de Productos</h2>
+
+@Html.ActionLink("Nuevo", "RegistrarTipoProdss", "TipoProducto", new { }, new { @class = "btn btn-primary" })
+<br />
+<br />
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center">ID</th>
+            <th>DESCRIPCION</th>
+            <th>CLASE</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">@item.IdTipoProd</td>
+                <td>@item.NombreTipoProd</td>
+                <td>@item.NombreClase</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarTipoProd", new { id = item.IdTipoProd }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdTipoProd }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@using SistemaWEB.Ferretero.Models
+@model List<ClaseBEAN>
+
+
+@{
+    ViewBag.Title = "ListaClase";
+}
+<h2 style="color:crimson">Lista De Clases</h2>
+@Html.ActionLink("Nuevo", "RegistrarClase", "Clase",new { },new { @class="btn btn-primary"})
+<br />
+<br />
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>DESCRIPCION</th>
+            <th>CATEGORIA</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.IdClase</td>
+            <td>@item.NombClase</td>
+            <td>@item.NombreCat</td>
+            <td>
+                @Html.ActionLink("Editar", "EditarClase", new { id = item.IdClase }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdClase }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+          
+    }
+        </tbody>
+    </table>

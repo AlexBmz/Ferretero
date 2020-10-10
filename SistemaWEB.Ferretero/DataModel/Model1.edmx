@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_SistemaFerreteroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbCategoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombCat" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbClase">
+          <Key>
+            <PropertyRef Name="IdClase" />
+          </Key>
+          <Property Name="IdClase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreClase" Type="nvarchar(max)" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="nvarchar(max)" />
+          <Property Name="ApePaterno" Type="nvarchar(max)" />
+          <Property Name="ApeMaterno" Type="nvarchar(max)" />
+          <Property Name="Direccion" Type="nvarchar(max)" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="IdTipoDoc" Type="int" Nullable="false" />
+          <Property Name="Documento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProd" Type="nvarchar(max)" />
+          <Property Name="PrecioUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="IdTipoProd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbTipoDocumento">
+          <Key>
+            <PropertyRef Name="IdTipoDoc" />
+          </Key>
+          <Property Name="IdTipoDoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbTipoProducto">
+          <Key>
+            <PropertyRef Name="IdTipoProd" />
+          </Key>
+          <Property Name="IdTipoProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombTipoProd" Type="nvarchar(max)" />
+          <Property Name="IdClase" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbVenta">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="FechaVenta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbVentaDetalle">
+          <Key>
+            <PropertyRef Name="IdVentaDet" />
+          </Key>
+          <Property Name="IdVentaDet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_tbClase_dbo_tbCategoria_IdCategoria">
+          <End Role="tbCategoria" Type="Self.tbCategoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbClase" Type="Self.tbClase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="tbClase">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc">
+          <End Role="tbTipoDocumento" Type="Self.tbTipoDocumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbCliente" Type="Self.tbCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoDocumento">
+              <PropertyRef Name="IdTipoDoc" />
+            </Principal>
+            <Dependent Role="tbCliente">
+              <PropertyRef Name="IdTipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd">
+          <End Role="tbTipoProducto" Type="Self.tbTipoProducto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbProducto" Type="Self.tbProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoProducto">
+              <PropertyRef Name="IdTipoProd" />
+            </Principal>
+            <Dependent Role="tbProducto">
+              <PropertyRef Name="IdTipoProd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbTipoProducto_dbo_tbClase_IdClase">
+          <End Role="tbClase" Type="Self.tbClase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbTipoProducto" Type="Self.tbTipoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClase">
+              <PropertyRef Name="IdClase" />
+            </Principal>
+            <Dependent Role="tbTipoProducto">
+              <PropertyRef Name="IdClase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVenta_dbo_tbCliente_IdCliente">
+          <End Role="tbCliente" Type="Self.tbCliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVenta" Type="Self.tbVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="tbVenta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto">
+          <End Role="tbProducto" Type="Self.tbProducto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVentaDetalle" Type="Self.tbVentaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProducto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="tbVentaDetalle">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta">
+          <End Role="tbVenta" Type="Self.tbVenta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVentaDetalle" Type="Self.tbVentaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbVenta">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="tbVentaDetalle">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_SistemaFerreteroModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCategoria" EntityType="Self.tbCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClase" EntityType="Self.tbClase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCliente" EntityType="Self.tbCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbProducto" EntityType="Self.tbProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTipoDocumento" EntityType="Self.tbTipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTipoProducto" EntityType="Self.tbTipoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbVenta" EntityType="Self.tbVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbVentaDetalle" EntityType="Self.tbVentaDetalle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_tbClase_dbo_tbCategoria_IdCategoria" Association="Self.FK_dbo_tbClase_dbo_tbCategoria_IdCategoria">
+            <End Role="tbCategoria" EntitySet="tbCategoria" />
+            <End Role="tbClase" EntitySet="tbClase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc" Association="Self.FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc">
+            <End Role="tbTipoDocumento" EntitySet="tbTipoDocumento" />
+            <End Role="tbCliente" EntitySet="tbCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd" Association="Self.FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd">
+            <End Role="tbTipoProducto" EntitySet="tbTipoProducto" />
+            <End Role="tbProducto" EntitySet="tbProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbTipoProducto_dbo_tbClase_IdClase" Association="Self.FK_dbo_tbTipoProducto_dbo_tbClase_IdClase">
+            <End Role="tbClase" EntitySet="tbClase" />
+            <End Role="tbTipoProducto" EntitySet="tbTipoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVenta_dbo_tbCliente_IdCliente" Association="Self.FK_dbo_tbVenta_dbo_tbCliente_IdCliente">
+            <End Role="tbCliente" EntitySet="tbCliente" />
+            <End Role="tbVenta" EntitySet="tbVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto" Association="Self.FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto">
+            <End Role="tbProducto" EntitySet="tbProducto" />
+            <End Role="tbVentaDetalle" EntitySet="tbVentaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta" Association="Self.FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta">
+            <End Role="tbVenta" EntitySet="tbVenta" />
+            <End Role="tbVentaDetalle" EntitySet="tbVentaDetalle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_SistemaFerreteroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbCategoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombCat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbClase" Relationship="Self.FK_dbo_tbClase_dbo_tbCategoria_IdCategoria" FromRole="tbCategoria" ToRole="tbClase" />
+        </EntityType>
+        <EntityType Name="tbClase">
+          <Key>
+            <PropertyRef Name="IdClase" />
+          </Key>
+          <Property Name="IdClase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreClase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbCategoria" Relationship="Self.FK_dbo_tbClase_dbo_tbCategoria_IdCategoria" FromRole="tbClase" ToRole="tbCategoria" />
+          <NavigationProperty Name="tbTipoProducto" Relationship="Self.FK_dbo_tbTipoProducto_dbo_tbClase_IdClase" FromRole="tbClase" ToRole="tbTipoProducto" />
+        </EntityType>
+        <EntityType Name="tbCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApePaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApeMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoDoc" Type="Int32" Nullable="false" />
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbTipoDocumento" Relationship="Self.FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc" FromRole="tbCliente" ToRole="tbTipoDocumento" />
+          <NavigationProperty Name="tbVenta" Relationship="Self.FK_dbo_tbVenta_dbo_tbCliente_IdCliente" FromRole="tbCliente" ToRole="tbVenta" />
+        </EntityType>
+        <EntityType Name="tbProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrecioUnit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoProd" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbTipoProducto" Relationship="Self.FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd" FromRole="tbProducto" ToRole="tbTipoProducto" />
+          <NavigationProperty Name="tbVentaDetalle" Relationship="Self.FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto" FromRole="tbProducto" ToRole="tbVentaDetalle" />
+        </EntityType>
+        <EntityType Name="tbTipoDocumento">
+          <Key>
+            <PropertyRef Name="IdTipoDoc" />
+          </Key>
+          <Property Name="IdTipoDoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbCliente" Relationship="Self.FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc" FromRole="tbTipoDocumento" ToRole="tbCliente" />
+        </EntityType>
+        <EntityType Name="tbTipoProducto">
+          <Key>
+            <PropertyRef Name="IdTipoProd" />
+          </Key>
+          <Property Name="IdTipoProd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombTipoProd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdClase" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbClase" Relationship="Self.FK_dbo_tbTipoProducto_dbo_tbClase_IdClase" FromRole="tbTipoProducto" ToRole="tbClase" />
+          <NavigationProperty Name="tbProducto" Relationship="Self.FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd" FromRole="tbTipoProducto" ToRole="tbProducto" />
+        </EntityType>
+        <EntityType Name="tbVenta">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="FechaVenta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbCliente" Relationship="Self.FK_dbo_tbVenta_dbo_tbCliente_IdCliente" FromRole="tbVenta" ToRole="tbCliente" />
+          <NavigationProperty Name="tbVentaDetalle" Relationship="Self.FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta" FromRole="tbVenta" ToRole="tbVentaDetalle" />
+        </EntityType>
+        <EntityType Name="tbVentaDetalle">
+          <Key>
+            <PropertyRef Name="IdVentaDet" />
+          </Key>
+          <Property Name="IdVentaDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbProducto" Relationship="Self.FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto" FromRole="tbVentaDetalle" ToRole="tbProducto" />
+          <NavigationProperty Name="tbVenta" Relationship="Self.FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta" FromRole="tbVentaDetalle" ToRole="tbVenta" />
+        </EntityType>
+        <Association Name="FK_dbo_tbClase_dbo_tbCategoria_IdCategoria">
+          <End Role="tbCategoria" Type="Self.tbCategoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbClase" Type="Self.tbClase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="tbClase">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbTipoProducto_dbo_tbClase_IdClase">
+          <End Role="tbClase" Type="Self.tbClase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbTipoProducto" Type="Self.tbTipoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClase">
+              <PropertyRef Name="IdClase" />
+            </Principal>
+            <Dependent Role="tbTipoProducto">
+              <PropertyRef Name="IdClase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc">
+          <End Role="tbTipoDocumento" Type="Self.tbTipoDocumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbCliente" Type="Self.tbCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoDocumento">
+              <PropertyRef Name="IdTipoDoc" />
+            </Principal>
+            <Dependent Role="tbCliente">
+              <PropertyRef Name="IdTipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVenta_dbo_tbCliente_IdCliente">
+          <End Role="tbCliente" Type="Self.tbCliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVenta" Type="Self.tbVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="tbVenta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd">
+          <End Role="tbTipoProducto" Type="Self.tbTipoProducto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbProducto" Type="Self.tbProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoProducto">
+              <PropertyRef Name="IdTipoProd" />
+            </Principal>
+            <Dependent Role="tbProducto">
+              <PropertyRef Name="IdTipoProd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto">
+          <End Role="tbProducto" Type="Self.tbProducto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVentaDetalle" Type="Self.tbVentaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProducto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="tbVentaDetalle">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta">
+          <End Role="tbVenta" Type="Self.tbVenta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbVentaDetalle" Type="Self.tbVentaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbVenta">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="tbVentaDetalle">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_SistemaFerreteroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbCategoria" EntityType="Self.tbCategoria" />
+          <EntitySet Name="tbClase" EntityType="Self.tbClase" />
+          <EntitySet Name="tbCliente" EntityType="Self.tbCliente" />
+          <EntitySet Name="tbProducto" EntityType="Self.tbProducto" />
+          <EntitySet Name="tbTipoDocumento" EntityType="Self.tbTipoDocumento" />
+          <EntitySet Name="tbTipoProducto" EntityType="Self.tbTipoProducto" />
+          <EntitySet Name="tbVenta" EntityType="Self.tbVenta" />
+          <EntitySet Name="tbVentaDetalle" EntityType="Self.tbVentaDetalle" />
+          <AssociationSet Name="FK_dbo_tbClase_dbo_tbCategoria_IdCategoria" Association="Self.FK_dbo_tbClase_dbo_tbCategoria_IdCategoria">
+            <End Role="tbCategoria" EntitySet="tbCategoria" />
+            <End Role="tbClase" EntitySet="tbClase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbTipoProducto_dbo_tbClase_IdClase" Association="Self.FK_dbo_tbTipoProducto_dbo_tbClase_IdClase">
+            <End Role="tbClase" EntitySet="tbClase" />
+            <End Role="tbTipoProducto" EntitySet="tbTipoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc" Association="Self.FK_dbo_tbCliente_dbo_tbTipoDocumento_IdTipoDoc">
+            <End Role="tbTipoDocumento" EntitySet="tbTipoDocumento" />
+            <End Role="tbCliente" EntitySet="tbCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVenta_dbo_tbCliente_IdCliente" Association="Self.FK_dbo_tbVenta_dbo_tbCliente_IdCliente">
+            <End Role="tbCliente" EntitySet="tbCliente" />
+            <End Role="tbVenta" EntitySet="tbVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd" Association="Self.FK_dbo_tbProducto_dbo_tbTipoProducto_IdTipoProd">
+            <End Role="tbTipoProducto" EntitySet="tbTipoProducto" />
+            <End Role="tbProducto" EntitySet="tbProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto" Association="Self.FK_dbo_tbVentaDetalle_dbo_tbProducto_IdProducto">
+            <End Role="tbProducto" EntitySet="tbProducto" />
+            <End Role="tbVentaDetalle" EntitySet="tbVentaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta" Association="Self.FK_dbo_tbVentaDetalle_dbo_tbVenta_IdVenta">
+            <End Role="tbVenta" EntitySet="tbVenta" />
+            <End Role="tbVentaDetalle" EntitySet="tbVentaDetalle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_SistemaFerreteroModelStoreContainer" CdmEntityContainer="BD_SistemaFerreteroEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCategoria">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbCategoria">
+              <MappingFragment StoreEntitySet="tbCategoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombCat" ColumnName="NombCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClase">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbClase">
+              <MappingFragment StoreEntitySet="tbClase">
+                <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+                <ScalarProperty Name="NombreClase" ColumnName="NombreClase" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCliente">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbCliente">
+              <MappingFragment StoreEntitySet="tbCliente">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="ApePaterno" ColumnName="ApePaterno" />
+                <ScalarProperty Name="ApeMaterno" ColumnName="ApeMaterno" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdTipoDoc" ColumnName="IdTipoDoc" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbProducto">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbProducto">
+              <MappingFragment StoreEntitySet="tbProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NombreProd" ColumnName="NombreProd" />
+                <ScalarProperty Name="PrecioUnit" ColumnName="PrecioUnit" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="IdTipoProd" ColumnName="IdTipoProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTipoDocumento">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbTipoDocumento">
+              <MappingFragment StoreEntitySet="tbTipoDocumento">
+                <ScalarProperty Name="IdTipoDoc" ColumnName="IdTipoDoc" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTipoProducto">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbTipoProducto">
+              <MappingFragment StoreEntitySet="tbTipoProducto">
+                <ScalarProperty Name="IdTipoProd" ColumnName="IdTipoProd" />
+                <ScalarProperty Name="NombTipoProd" ColumnName="NombTipoProd" />
+                <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbVenta">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbVenta">
+              <MappingFragment StoreEntitySet="tbVenta">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbVentaDetalle">
+            <EntityTypeMapping TypeName="BD_SistemaFerreteroModel.tbVentaDetalle">
+              <MappingFragment StoreEntitySet="tbVentaDetalle">
+                <ScalarProperty Name="IdVentaDet" ColumnName="IdVentaDet" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
