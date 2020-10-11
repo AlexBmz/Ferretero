@@ -4,8 +4,12 @@
     ViewBag.Title = "ListarCat";
 }
 
-<h2>Lista de Categorías</h2>
+<h2 style="color:crimson">Lista de Categorías</h2>
 @Html.ActionLink("Nuevo", "RegistrarCategoria", "Categoria", new { }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Categorias Inactivas", "ListaCatInactivas", "Categoria", new { }, new { @class = "btn btn-warning" })
+@Html.ActionLink("Buscar", "BusquedaCategoria", "Categoria", new { }, new { @class = "btn btn-success" })
+
+
 <br />
 <br />
 <table class="table table-bordered">
@@ -22,9 +26,13 @@
             <tr>
                 <td class="text-center">@item.IdCategoria</td>
                 <td>@item.NombCat</td>
+
                 <td>
                     @Html.ActionLink("Editar", "EditarCategoria", new { id = item.IdCategoria }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCategoria }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "ListarCate", new { id = item.IdCategoria }, new { @class = "btn btn-danger" })
+
+                    @*<input type="submit" value="Eliminar" class="btn btn-danger" />*@
+
                 </td>
             </tr>
 

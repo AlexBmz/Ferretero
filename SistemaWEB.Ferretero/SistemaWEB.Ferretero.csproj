@@ -339,6 +339,7 @@
     <Content Include="Views\Categoria\BusquedaCategoria.cshtml" />
     <Content Include="Views\Cliente\BuscarClienteByNombre.cshtml" />
     <Content Include="Views\Producto\BuscarProdByNomb.cshtml" />
+    <Content Include="Views\Categoria\ListaCatInactivas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

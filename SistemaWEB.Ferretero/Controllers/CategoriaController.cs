@@ -12,12 +12,20 @@ namespace SistemaWEB.Ferretero.Controllers
     {
         CategoriaDAO oCatDAO = new CategoriaDAO();
         // GET: Categoria
+        [HttpGet]
         public ActionResult ListarCat()
         {
             List<CategoriaBEAN> listaCat = new List<CategoriaBEAN>();
             listaCat = oCatDAO.ListarCategorias();
             return View(listaCat);
         }
+        public ActionResult ListarCate(int id)
+        {
+          oCatDAO.EliminarCat(id);
+
+            return RedirectToAction("ListarCat");
+        }
+
         [HttpGet]
         public ActionResult BusquedaCategoria()
         {
@@ -57,6 +65,18 @@ namespace SistemaWEB.Ferretero.Controllers
         {
             oCatDAO.ActualizarCategoria(oCatBean);
             return RedirectToAction ("ListarCat");
+        }
+       
+        public ActionResult ListaCatInactivas()
+        {
+            var list = oCatDAO.ListarCatInactivas();
+            return View(list);
+        }
+
+        public ActionResult ActivarCat(int id)
+        {
+            oCatDAO.ActivarCat(id);
+            return RedirectToAction("ListarCat");
         }
     }
 }

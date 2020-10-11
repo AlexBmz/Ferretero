@@ -4,7 +4,7 @@
     ViewBag.Title = "BusquedaCategoria";
 }
 
-<h2 style="color:crimson" class="col col-lg-offset-4"> Busqueda  de  Categorias</h2>
+<h2 style="color:crimson" class="col col-lg-offset-4"> Busqueda  de  Categorías</h2>
 <div class="col col-lg-offset-4">
     <br />
     <form action="/Categoria/BusquedaCategoria" method="post">
@@ -40,6 +40,7 @@
                 <td>
                     @Html.ActionLink("Editar", "EditarCategoria", new { id = item.IdCategoria }, new { @class = "btn btn-info" }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCategoria }, new { @class = "btn btn-danger" })
+
                 </td>
             </tr>
         }
