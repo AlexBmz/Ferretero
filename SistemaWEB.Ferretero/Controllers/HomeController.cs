@@ -13,5 +13,9 @@ namespace SistemaWEB.Ferretero.Controllers
         {
             return View();
         }
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

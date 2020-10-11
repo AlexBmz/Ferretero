@@ -104,6 +104,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\index.css" />
+    <Content Include="css\layout.css" />
+    <Content Include="css\reset.css" />
+    <Content Include="css\style.css" />
     <Content Include="DataModel\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -128,6 +131,13 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Img\Sanyo-Jafep-presenta-Ox-3-en-1-esmalte-sintetico-antioxido-y-convertidor.png" />
+    <Content Include="js\html5.js" />
+    <Content Include="js\jquery-1.6.js" />
+    <Content Include="js\jquery.easing.1.3.js" />
+    <Content Include="js\PIE.htc" />
+    <Content Include="js\script.js" />
+    <Content Include="js\tms-0.3.js" />
+    <Content Include="js\tms_presets.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -340,6 +350,7 @@
     <Content Include="Views\Cliente\BuscarClienteByNombre.cshtml" />
     <Content Include="Views\Producto\BuscarProdByNomb.cshtml" />
     <Content Include="Views\Categoria\ListaCatInactivas.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

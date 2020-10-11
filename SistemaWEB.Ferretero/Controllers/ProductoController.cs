@@ -41,6 +41,11 @@ namespace SistemaWEB.Ferretero.Controllers
         [HttpPost]
         public ActionResult RegistrarProducto(ProductoBEAN oProdBean)
         {
+            if (!ModelState.IsValid)
+            {
+                this.RegistrarProducto();
+                return View();
+            }
             oProdDAO.RegistrarProducto(oProdBean);
             return RedirectToAction("ListaProducto");
         }
