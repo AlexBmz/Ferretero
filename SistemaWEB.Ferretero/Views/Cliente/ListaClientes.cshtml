@@ -8,6 +8,8 @@
 <h2 style="color:crimson">Lista de Clientes</h2>
 
 @Html.ActionLink("Nuevo", "RegistrarCliente", "Cliente", new { }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Buscar", "BuscarClienteByNombre", "Cliente", new { }, new { @class = "btn btn-success" })
+
 <br />
 <br />
 <table class="table table-bordered">
@@ -38,7 +40,7 @@
                 <td>@item.Documento</td>
                 <td>
                     @Html.ActionLink("Editar", "EditarCliente", new { id = item.IdCliente }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCliente }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "EliminarCliente", new { id = item.IdCliente }, new { @class = "btn btn-danger" })
                 </td>
 
             </tr>

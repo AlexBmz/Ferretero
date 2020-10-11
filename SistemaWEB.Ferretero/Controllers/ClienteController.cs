@@ -68,6 +68,11 @@ namespace SistemaWEB.Ferretero.Controllers
             oCliDAO.ActualizarCliente(oCliBean);
             return RedirectToAction("ListaClientes");
         }
+        public ActionResult EliminarCliente(int id)
+        {
+            oCliDAO.EliminarCliente(id);
+            return RedirectToAction("ListaClientes");
+        }
     }
 }
 

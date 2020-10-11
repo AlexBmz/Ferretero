@@ -133,6 +133,47 @@ namespace SistemaWEB.Ferretero.Models
             return oCliente;
         }
 
+        public List<ClienteBEAN> EliminarCliente(int idcli)
+        {
+            List<ClienteBEAN> listaCli = new List<ClienteBEAN>();
+            ClienteBEAN oCliBean;
+            try
+            {
+                using (var con = new SqlConnection(_StringConnection))
+                {
+                    using (var cmd = new SqlCommand("SP_EliminarCliente", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idCli", idcli);
+                        con.Open();
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                oCliBean = new ClienteBEAN();
+                                oCliBean.IdCliente = Convert.ToInt32(dr[0]);
+                                oCliBean.NombreCliente = Convert.ToString(dr[1]);
+                                oCliBean.ApePat = Convert.ToString(dr[2]);
+                                oCliBean.ApeMat = Convert.ToString(dr[3]);
+                                oCliBean.Direccion = Convert.ToString(dr[4]);
+                                oCliBean.Telefono = Convert.ToInt32(dr[5]);
+                                oCliBean.Email = Convert.ToString(dr[6]);
+                                oCliBean.Documento = Convert.ToInt32(dr[7]);
+                                oCliBean.Descripcion = Convert.ToString(dr[8]);
+                                listaCli.Add(oCliBean);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return listaCli;
+        }
+
 
         public List<ClienteBEAN> BuscarClientePorNomb(string nomb)
         {

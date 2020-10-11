@@ -38,7 +38,7 @@
                 <td>@item.NombTipoProd</td>
                 <td>
                     @Html.ActionLink("Editar", "EditarProducto", new { id = item.IdProducto }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProducto }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "EliminarProducto", new { id = item.IdProducto }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

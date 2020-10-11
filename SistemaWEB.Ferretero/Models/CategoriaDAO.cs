@@ -143,7 +143,7 @@ namespace SistemaWEB.Ferretero.Models
                 throw ex;
             }
             return oCat;
-        }
+        }//EDITAR
         public List<CategoriaBEAN>BuscarCateId(int id)
         {
             List<CategoriaBEAN> lista = new List<CategoriaBEAN>();

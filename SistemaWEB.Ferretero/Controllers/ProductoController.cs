@@ -58,5 +58,10 @@ namespace SistemaWEB.Ferretero.Controllers
             oProdDAO.ActualizarProducto(oProd);
             return RedirectToAction("ListaProducto");
         }
+        public ActionResult EliminarProducto(int id)
+        {
+            oProdDAO.EliminarProducto(id);
+            return RedirectToAction("ListaProducto");
+        }
     }
 }

@@ -161,6 +161,44 @@ namespace SistemaWEB.Ferretero.Models
             return lista;
         }
 
+        public List<ProductoBEAN> EliminarProducto(int idProd)
+        {
+            List<ProductoBEAN> listaProd = new List<ProductoBEAN>();
+            ProductoBEAN oProd;
+            try
+            {
+                using (var con = new SqlConnection(_StringConnection))
+                {
+                    using (var cmd = new SqlCommand("Sp_EliminarProducto", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idProd", idProd);
+                        con.Open();
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                oProd = new ProductoBEAN();
+                                oProd.IdProducto = Convert.ToInt32(dr[0]);
+                                oProd.NombreProd = Convert.ToString(dr[1]);
+                                oProd.PrecioProd = Convert.ToDecimal(dr[2]);
+                                oProd.Stock = Convert.ToInt32(dr[3]);
+                                oProd.NombTipoProd = Convert.ToString(dr[4]);
+                                listaProd.Add(oProd);
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return listaProd;
+        }
+
         public ProductoBEAN ActualizarProducto(ProductoBEAN oProd)
         {
             try
